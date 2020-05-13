@@ -2,8 +2,14 @@
 	include "define.php";
 
 	try {
-		require VIEW . DS . "layout/normal.php";
-	} catch(\exception $e) {
+
+		$R = new Common\App();
+
+		$RESULT = $R->initApp();
+		$R->render($RESULT);
+
+		
+	} catch(\Exception $e) {
 		var_dump($e);
 	}
 	
