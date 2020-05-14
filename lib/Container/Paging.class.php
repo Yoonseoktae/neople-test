@@ -25,8 +25,8 @@ class paging
 	public function getPageList($url, $Parameters) 
 	{
 		$cur_page = $this->getPage();
-		$total_page = floor(($this->count - 1) / $this->getLPP()) + 1;
-
+		$total_page = floor(((int)$this->count - 1) / $this->getLPP()) + 1;
+		
 		$begin_page = floor(($cur_page - 1) / 10) * 10 + 1;
 		$last_page = min($begin_page + 9, $total_page);
 
@@ -68,7 +68,7 @@ class paging
 
 	public function getPageNext($url, $Parameters) 
 	{
-		$total_page = floor(($this->count - 1) / $this->getLPP()) + 1;
+		$total_page = floor(((int)$this->count - 1) / $this->getLPP()) + 1;
 		$next_page = min($total_page, $this->getPage() + 1);
 
 		$Parameters["page_no"] = $next_page;
@@ -82,7 +82,7 @@ class paging
 	public function getPageLast($url, $Parameters) 
 	{
 
-		$Parameters["page_no"] = floor(($this->count - 1) / $this->getLPP()) + 1;
+		$Parameters["page_no"] = floor(((int)$this->count - 1) / $this->getLPP()) + 1;
 
 		return array(
 			"url" => $url,
