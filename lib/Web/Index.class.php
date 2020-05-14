@@ -1,9 +1,9 @@
 <?php
-namespace Web\Board;
+namespace Web;
 
 use Common\RestApi;
 
-class Lists extends RestApi
+class Index extends RestApi
 {
 
 	function __construct() 

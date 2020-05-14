@@ -15,14 +15,18 @@ class Board extends Model
 	{
 		$limit = ($page-1) * $lpp;
 
-		$sql = "SELECT * FROM neople.board WHERE board_name = ? AND is_delete = 0";
+		$sql = "SELECT id, board_name, `subject`, writer, view_count 
+				FROM neople.board 
+				WHERE board_name = ? 
+				AND is_delete = 0";
+
 		if($keyword != "") {
 			$sql .= " AND `subject` like \'% ".$keyword."%\'";
 			$sql .= " AND content like \'% ".$keyword."%\'";
 		}
 		$sql .= " ORDER BY id DESC LIMIT ?, ?";
 
-		return $this->getResult($sql, $board_name, $page, $limit);
+		return $this->getList($sql, $board_name, $limit, $lpp);
 	}
 
 	function getBoardCount($board_name, $keyword)
@@ -34,6 +38,17 @@ class Board extends Model
 		}
 
 		return $this->getResult($sql, $board_name);
+	}
+
+	function getBoardDetail($board_name, $board_id)
+	{
+		$sql = "SELECT id, board_name, `subject`, writer, view_count 
+				FROM neople.board
+				WHERE id = ?
+				AND board_name = ?
+				AND is_delete = 0";
+
+		return $this->getResult($sql, $board_id, $board_name);
 	}
 
 	function setBoard()
