@@ -1,6 +1,7 @@
 # MSA구조로 진행하려했으나 시간안에 모든 구조 및 기능을 개발하기 어려워 일단 간단하게 개발하였습니다.
 
 PHP 개발내용
+
 	1. MVC 방식 처리
 		- CORE ROOT			: /lib/Common
 		- MODEL ROOT		: /lib/Container
@@ -16,18 +17,22 @@ PHP 개발내용
 	
 
 Jquery 사용한 기능
+
 	- ajax
 		1. GET, POST, PUT, DELETE 방식 Method 사용
 	- json2html
 		2. ajax를 response json데이터를 기반으로 layout구성용 사용.
 
 CSS, HTML 참고 및 사용 출처
+
 	- https://m.blog.naver.com/PostList.nhn?blogId=bgpoilkj
 
 Database
+
 	- AWS RDS 프리티어 Mysql 구성 (접속정보 config/config.php 명세)
 
 Database DDL
+
 	CREATE TABLE `board` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '고유값',
 	`board_name` varchar(32) DEFAULT NULL COMMENT '게시판명',
@@ -45,7 +50,8 @@ Database DDL
 	) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='네오플 게시판 테이블';
 
 REST API ERROR-CODE
-{
+
+
 	"BOARD" : {
 		"LISTS" : {
 			"1100001":"게시판명이 입력되지않았습니다.",
@@ -79,4 +85,3 @@ REST API ERROR-CODE
 			"1500005":"데이터 입력에 실패하였습니다.",
 		}
 	}
-}
