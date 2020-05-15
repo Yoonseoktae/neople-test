@@ -11,12 +11,15 @@ class Lists extends RestApi
 
 	function __construct()
 	{
-		
+		parent::__construct();
 	}
 
 	function run()
 	{
-		
+		parent::run();
+	}
+
+	function onGet() {
 		// Step 1. 변수 세팅
 		$url = $this->getRequest("url", "");
 		$board_name = $this->getRequest("board_name");
@@ -44,7 +47,6 @@ class Lists extends RestApi
 		];
 		
 		$this->throwSuccess($Res);
-		
 	}
 }
 

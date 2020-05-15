@@ -21,8 +21,6 @@ class RestApi
 		$this->error_message = '';
 		$this->curl = new Curl();
 		
-		$this->endpoint = $_SERVER["REQUEST_SCHEMA"].$_SERVER["HTTP_HOST"];
-
 	}
 
 	function throwError($code, $message, $Params = null)
@@ -83,6 +81,40 @@ class RestApi
 		$this->error_message = $message;
 	}
 
+	function run()
+	{
+		return $this->{"_on{$this->http_method}"}();
+	}
+	
+	function _onGet()
+	{
+		if (method_exists($this, "onGet")) return $this->onGet();
+		else throw new \Exception("method not found.");
+	}
+	
+	function _onPost()
+	{
+		if (method_exists($this, "onPost")) return $this->onPost();
+		else throw new \Exception("method not found.");
+	}
+	
+	function _onPut()
+	{
+		if (method_exists($this, "onPut")) return $this->onPut();
+		else throw new \Exception("method not found.");
+	}
+
+	function _onDelete()
+	{
+		if (method_exists($this, "onDelete")) return $this->onDelete();
+		else throw new \Exception("method not found.");
+	}
+
+	function _onPatch()
+	{
+		if (method_exists($this, "onPatch")) return $this->onPatch();
+		else throw new \Exception("method not found.");
+	}
 
 }
 

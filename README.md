@@ -7,7 +7,7 @@ PHP 개발내용
 		- VIEW ROOT 		: /view
 		- CONTROLLER ROOT	: /lib/controller
 	2. Route
-	3. RESTFUL API
+	3. RESTFUL API 및 JAVASCRIPT callback처리
 	4. mysqli 사용, binding 방식
 	5. Class 기반.
 	6. CURL 도입 실패.
@@ -21,8 +21,11 @@ Jquery 사용한 기능
 	- json2html
 		2. ajax를 response json데이터를 기반으로 layout구성용 사용.
 
+CSS, HTML 참고 및 사용 출처
+	- https://m.blog.naver.com/PostList.nhn?blogId=bgpoilkj
+
 Database
-	- AWS RDS 프리티어 Mysql 구성 
+	- AWS RDS 프리티어 Mysql 구성 (접속정보 config/config.php 명세)
 
 Database DDL
 	CREATE TABLE `board` (
@@ -30,7 +33,8 @@ Database DDL
 	`board_name` varchar(32) DEFAULT NULL COMMENT '게시판명',
 	`subject` varchar(256) NOT NULL COMMENT '제목',
 	`content` mediumtext COMMENT '내용',
-	`view_count` int(11) DEFAULT '0' COMMENT '조회수',
+	`writer` varchar(64) DEFAULT NULL COMMENT '작성자',
+	`pw` varchar(128) DEFAULT '' COMMENT '게시글 비밀번호',
 	`is_delete` int(11) DEFAULT '0' COMMENT '삭제여부',
 	`reg_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '작성일',
 	`mod_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '최종수정일',
@@ -38,34 +42,41 @@ Database DDL
 	KEY `table_name` (`board_name`),
 	KEY `reg_date` (`mod_date`),
 	KEY `mod_date` (`mod_date`)
-	) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='네오플 게시판 테이블';
+	) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='네오플 게시판 테이블';
 
+REST API ERROR-CODE
+{
+	"BOARD" : {
+		"LISTS" : {
+			"1100001":"게시판명이 입력되지않았습니다.",
+		},
+		"DETAIL" : {
+			"1200001":"게시판명이 입력되지않았습니다.",
+			"1200002":"게시판 고유번호가 입력되지 않았습니다.",
+			"1200003":"데이터 조회에 실패하였습니다.",
+		},
+		"MODIFY" : {
+			"1300001":"게시판명이 입력되지 않았습니다.",
+			"1300002":"게시판 고유번호가 입력되지 않았습니다.",
+			"1300003":"데이터 조회에 실패하였습니다.",
 
-
-	CREATE TABLE `user` (
-	`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '고객번호',
-	`email` varchar(128) NOT NULL COMMENT 'E-mail 주소',
-	`pw` varchar(128) NOT NULL COMMENT '비밀번호',
-	`error_count` int(11) DEFAULT '0' COMMENT '비밀번호 오류횟수',
-	`status` enum('ban','active','left') DEFAULT 'active' COMMENT '회원 상태',
-	`reg_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '등록일',
-	`mod_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '최종수정일',
-	PRIMARY KEY (`id`),
-	UNIQUE KEY `email` (`email`),
-	KEY `email_pw` (`email`,`pw`)
-	) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='유저 테이블';
-
-	CREATE TABLE `access_token` (
-	`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '고유값',
-	`access_token` varchar(192) NOT NULL COMMENT '접근 access_token',
-	`user_id` bigint(20) DEFAULT NULL COMMENT '사용자 ID',
-	`expire_date` datetime DEFAULT NULL COMMENT '유효시간',
-	`reg_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '등록일',
-	PRIMARY KEY (`id`),
-	KEY `access_token` (`access_token`),
-	KEY `expire_date` (`expire_date`),
-	KEY `user_id` (`user_id`)
-	) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='인증 Token 정보';
-
-
-
+			"1302001":"게시판명이 입력되지 않았습니다.",
+			"1302002":"게시판 고유번호가 입력되지 않았습니다.",
+			"1302003":"제목이 입력되지 않았습니다.",
+			"1302004":"내용이 입력되지 않았습니다.",
+			"1302005":"데이터 변경에 실패하였습니다.",
+		},
+		"DELETE" : {
+			"1400001":"게시판명이 입력되지 않았습니다.",
+			"1400002":"게시판 고유번호가 입력되지 않았습니다.",
+			"1400003":"데이터 삭제에 실패하였습니다.",
+		},
+		"WRITE" : {
+			"1500001":"게시판명이 입력되지 않았습니다.",
+			"1500002":"제목이 입력되지 않았습니다.",
+			"1500003":"작성자명이 입력되지 않았습니다.",
+			"1500004":"내용이 입력되지 않았습니다.",
+			"1500005":"데이터 입력에 실패하였습니다.",
+		}
+	}
+}
