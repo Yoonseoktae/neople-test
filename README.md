@@ -8,79 +8,40 @@ Github
 	Repository Clone Address (public)
 	- https://github.com/Yoonseoktae/neople-test.git
 
-게시판 URL 
-
-	게시글 목록
-	- {site_url}/board/lists
-	게시글 상세보기
-	- {site_url}/board/detail?id={board_id}
-	게시글 수정하기
-	- {site_url}/board/modify?id={board_id}
-	게시글 작성하기
-	- {site_url}/board/write
-
-
-PHP 개발내용
-
-	1. MVC 방식 처리
-		- CORE ROOT			: /lib/Common
-		- MODEL ROOT		: /lib/Container
-		- VIEW ROOT 		: /view
-		- CONTROLLER ROOT	: /lib/controller
-	2. Route
-	3. RESTFUL API 및 JAVASCRIPT callback처리
-	4. mysqli 사용, binding 방식
-	5. Class 기반.
-	6. CURL 도입 실패.
-		- ROUTER -> CONTROLLER -> CURL -> API호출 프로세스 도입실패
-		- AJAX -> CONTROLLER -> API호출 -> Json2Html 프로세스로 변경.
-	
-
-Jquery 사용한 기능
-
-	- ajax
-		1. GET, POST, PUT, DELETE 방식 Method 사용
-	- json2html
-		2. ajax를 response json데이터를 기반으로 layout구성용 사용.
-
-CSS, HTML 참고 및 사용 출처
-
-	- https://m.blog.naver.com/PostList.nhn?blogId=bgpoilkj
-
 
 REST API URL (mode=api를 매개변수로 전달필수.)
 	
 	게시글 목록 조회
-	- {GET} /board/list?mode=api&board_name=neople
+	- {GET} {site_url}/board/list?mode=api&board_name=neople
 
 	게시글 상세정보 조회
-	- {GET} /board/detail?mode=api&board_id={board_id}&board_name=neople
+	- {GET} {site_url}/board/detail?mode=api&board_id={board_id}&board_name=neople
 
 	게시글 작성하기
-	- {POST}} /board/write?mode=api
+	- {POST} {site_url}/board/write?mode=api
 	- data : 	{
-					"board_name" : "neople",
-					"subject" : {subject},
-					"content" : {content},
-					"writer" : {writer},
-					"pw" : {password}
-				};
+				"board_name" : "neople",
+				"subject" : {subject},
+				"content" : {content},
+				"writer" : {writer},
+				"pw" : {password}
+			};
 
 	게시글 수정하기
-	- {GET} /board/modify?mode=api&board_id={board_id}&board_name=neople
-	- {PUT} /board/list?mode=api
+	- {GET} {site_url}/board/modify?mode=api&board_id={board_id}&board_name=neople
+	- {PUT} {site_url}/board/list?mode=api
 	- data = 	{
-					"mode" : "api",
-					"board_name" : "neople",
-					"board_id" : {board_id}
-				};
+				"mode" : "api",
+				"board_name" : "neople",
+				"board_id" : {board_id}
+			};
 
 	게시글 삭제하기
 	- {DELETE} /board/list?mode=api
 	- data = 	{
-					"board_name" : "neople",
-					"board_id" : {board_id}
-				};
+				"board_name" : "neople",
+				"board_id" : {board_id}
+			};
 				
 
 REST API ERROR-CODE
@@ -119,6 +80,35 @@ REST API ERROR-CODE
 			"1500005":"데이터 입력에 실패하였습니다.",
 		}
 	}
+
+
+PHP 개발내용
+
+	1. MVC 방식 처리
+		- CORE ROOT		: /lib/Common
+		- MODEL ROOT		: /lib/Container
+		- VIEW ROOT 		: /view
+		- CONTROLLER ROOT	: /lib/controller
+	2. Route
+	3. RESTFUL API 및 JAVASCRIPT callback처리
+	4. mysqli 사용, binding 방식
+	5. Class 기반.
+	6. CURL 도입 실패.
+		- ROUTER -> CONTROLLER -> CURL -> API호출 프로세스 도입실패
+		- AJAX -> CONTROLLER -> API호출 -> Json2Html 프로세스로 변경.
+	
+
+Jquery 사용한 기능
+
+	- ajax
+		1. GET, POST, PUT, DELETE 방식 Method 사용
+	- json2html
+		2. ajax를 response json데이터를 기반으로 layout구성용 사용.
+
+CSS, HTML 참고 및 사용 출처
+
+	- https://m.blog.naver.com/PostList.nhn?blogId=bgpoilkj
+
 
 Database
 
