@@ -5,6 +5,11 @@ use Common\RestApi;
 
 use Container\Data\Board;
 
+/**
+* @file lib/Controller/Api/Board/Write.class.php
+* @brief 게시글 작성 관련 클래스
+* @author 윤석태 (seknman123@naver.com)
+*/
 class Write extends RestApi
 {
 
@@ -19,6 +24,10 @@ class Write extends RestApi
 		
 	}
 	
+	/**
+	* @brief 게시글 등록 Controller
+	* @return object
+	*/
 	function onPost() 
 	{
 		// Step 1. 변수 세팅

@@ -6,6 +6,11 @@ use Common\RestApi;
 use Container\Data\Board;
 use Container\Paging;
 
+/**
+* @file lib/Controller/Api/Board/Lists.class.php
+* @brief 게시글 리스트 조회 관련 클래스
+* @author 윤석태 (seknman123@naver.com)
+*/
 class Lists extends RestApi
 {
 
@@ -19,6 +24,10 @@ class Lists extends RestApi
 		parent::run();
 	}
 
+	/**
+	* @brief 게시글 리스트 조회 Controller
+	* @return object
+	*/
 	function onGet() {
 		// Step 1. 변수 세팅
 		$url = $this->getRequest("url", "");

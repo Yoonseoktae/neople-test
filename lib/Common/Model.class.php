@@ -1,6 +1,11 @@
 <?php
 namespace Common;
 
+/**
+* @file lib/Common/Model.class.php
+* @brief Mysql 연결하기위한 모델관련 클래스
+* @author 윤석태 (seknman123@naver.com)
+*/
 class Model
 {
 	var $mysqli;
@@ -27,6 +32,10 @@ class Model
 		
 	}
 
+	/**
+	* @brief Mysqli DB연결 함수
+	* @return void
+	*/
 	function connect()
 	{
 		$host = $this->config["database"]["host"];
@@ -47,7 +56,11 @@ class Model
 		}
 	}
 
-
+	/**
+	* @brief 바인딩 타입설정
+	* @param array $Args
+	* @return string
+	*/
 	function getBindType($Args)
 	{
 		$bind_types = "";
@@ -60,8 +73,12 @@ class Model
 		return $bind_types;
 	}
 
-
-
+	/**
+	* @brief 쿼리 준비 후 전달받은 매개변수로 바인딩처리
+	* @param string $query
+	* @param array $Args
+	* @return array
+	*/
 	function prepare($query, $Args)
 	{
 		$result = null;
@@ -106,7 +123,11 @@ class Model
 		return $Ret;
 	}
 
-
+	/**
+	* @brief INSERT, UPDATE, DELETE같은 단일실행 쿼리처리함수.
+	* @param string $query
+	* @return array
+	*/
 	function execute($query)
 	{
 		$args = func_get_args();
@@ -140,6 +161,11 @@ class Model
 	}
 
 
+	/**
+	* @brief SELECT row가 1행일 경우 쿼리처리함수.
+	* @param string $query
+	* @return array
+	*/
 	function getResult($query)
 	{
 
@@ -178,11 +204,10 @@ class Model
 
 
 	/**
-	 * 데이테베이스의 결과를 모두 가져와서 list에 넣는다.
-	 *
-	 * @param [type] $query
-	 * @return void
-	 */
+	* @brief SELECT 여러행 조회일 경우 key value방식 쿼리처리함수.
+	* @param string $query
+	* @return array
+	*/
 	function getList($query)
 	{
 		$args = func_get_args();
@@ -221,6 +246,10 @@ class Model
 		}
 	}
 
+	/**
+	* @brief 마지막 삽입한 primary key값 가져오는 함수
+	* @return int
+	*/
 	function insert_id()
 	{
 		return  $this->mysqli->insert_id;

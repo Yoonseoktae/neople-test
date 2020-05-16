@@ -5,6 +5,11 @@ use Common\RestApi;
 
 use Container\Data\Board;
 
+/**
+* @file lib/Controller/Api/Board/Detail.class.php
+* @brief 게시글 상세보기 관련 클래스
+* @author 윤석태 (seknman123@naver.com)
+*/
 class Detail extends RestApi
 {
 
@@ -19,6 +24,10 @@ class Detail extends RestApi
 		parent::run();
 	}
 
+	/**
+	* @brief 게시글 상세내용 조회 Controller
+	* @return object
+	*/
 	public function onGet() {
 		// Step 1. 변수 세팅
 		$board_name = $this->getRequest("board_name");

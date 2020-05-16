@@ -5,6 +5,11 @@ use Common\RestApi;
 
 use Container\Data\Board;
 
+/**
+* @file lib/Controller/Api/Board/Modify.class.php
+* @brief 게시글 수정 관련 클래스
+* @author 윤석태 (seknman123@naver.com)
+*/
 class Modify extends RestApi
 {
 
@@ -19,6 +24,10 @@ class Modify extends RestApi
 		
 	}
 	
+	/**
+	* @brief 게시글 상세내역 조회 Controller
+	* @return object
+	*/
 	function onGet()
 	{
 		// Step 1. 변수 세팅
@@ -39,6 +48,10 @@ class Modify extends RestApi
 		$this->throwSuccess($Res);
 	}
 
+	/**
+	* @brief 게시글 수정 Controller
+	* @return object
+	*/
 	function onPut() 
 	{
 		// Step 1. 변수 세팅

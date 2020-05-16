@@ -1,6 +1,11 @@
 <?php
 namespace Common;
 
+/**
+* @file lib/Common/Curl.class.php
+* @brief REST API 서버간 통신을 위한 CURL 클래스
+* @author 윤석태 (seknman123@naver.com)
+*/
 class Curl {
 
 	private $target = "";

@@ -5,6 +5,11 @@ use Common\RestApi;
 
 use Container\Data\Board;
 
+/**
+* @file lib/Controller/Api/Board/Delete.class.php
+* @brief 게시글 삭제 관련 클래스
+* @author 윤석태 (seknman123@naver.com)
+*/
 class Delete extends RestApi
 {
 
@@ -19,6 +24,10 @@ class Delete extends RestApi
 		parent::run();
 	}
 
+	/**
+	* @brief 게시글 삭제처리 Controller
+	* @return object
+	*/
 	public function onDelete() {
 		// Step 1. 변수 세팅
 		$board_name = $this->getRequest("board_name");

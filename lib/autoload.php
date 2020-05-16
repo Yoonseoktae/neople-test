@@ -1,6 +1,10 @@
 <?php
 spl_autoload_register("neopleAutoload");
-/** TODO:: doxygen 주석달기 */
+
+/**
+* @brief 클래스파일 오토로드
+* @return object
+*/
 function neopleAutoload($class)
 {
 	$class_file = str_replace("\\", DS, $class);

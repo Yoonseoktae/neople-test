@@ -1,5 +1,25 @@
 # README
 
+
+Github 
+
+	URI
+	- https://github.com/Yoonseoktae/neople-test
+	Repository Clone Address (public)
+	- https://github.com/Yoonseoktae/neople-test.git
+
+게시판 URL 
+
+	게시글 목록
+	- {site_url}/board/lists
+	게시글 상세보기
+	- {site_url}/board/detail?id={board_id}
+	게시글 수정하기
+	- {site_url}/board/modify?id={board_id}
+	게시글 작성하기
+	- {site_url}/board/write
+
+
 PHP 개발내용
 
 	1. MVC 방식 처리
@@ -27,27 +47,41 @@ CSS, HTML 참고 및 사용 출처
 
 	- https://m.blog.naver.com/PostList.nhn?blogId=bgpoilkj
 
-Database
 
-	- AWS RDS 프리티어 Mysql 구성 (접속정보 config/config.php 명세)
+REST API URL (mode=api를 매개변수로 전달필수.)
+	
+	게시글 목록 조회
+	- {GET} /board/list?mode=api&board_name=neople
 
-Database DDL
+	게시글 상세정보 조회
+	- {GET} /board/detail?mode=api&board_id={board_id}&board_name=neople
 
-	CREATE TABLE `board` (
-	`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '고유값',
-	`board_name` varchar(32) DEFAULT NULL COMMENT '게시판명',
-	`subject` varchar(256) NOT NULL COMMENT '제목',
-	`content` mediumtext COMMENT '내용',
-	`writer` varchar(64) DEFAULT NULL COMMENT '작성자',
-	`pw` varchar(128) DEFAULT '' COMMENT '게시글 비밀번호',
-	`is_delete` int(11) DEFAULT '0' COMMENT '삭제여부',
-	`reg_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '작성일',
-	`mod_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '최종수정일',
-	PRIMARY KEY (`id`),
-	KEY `table_name` (`board_name`),
-	KEY `reg_date` (`mod_date`),
-	KEY `mod_date` (`mod_date`)
-	) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='네오플 게시판 테이블';
+	게시글 작성하기
+	- {POST}} /board/write?mode=api
+	- data : 	{
+					"board_name" : "neople",
+					"subject" : {subject},
+					"content" : {content},
+					"writer" : {writer},
+					"pw" : {password}
+				};
+
+	게시글 수정하기
+	- {GET} /board/modify?mode=api&board_id={board_id}&board_name=neople
+	- {PUT} /board/list?mode=api
+	- data = 	{
+					"mode" : "api",
+					"board_name" : "neople",
+					"board_id" : {board_id}
+				};
+
+	게시글 삭제하기
+	- {DELETE} /board/list?mode=api
+	- data = 	{
+					"board_name" : "neople",
+					"board_id" : {board_id}
+				};
+				
 
 REST API ERROR-CODE
 
@@ -85,3 +119,25 @@ REST API ERROR-CODE
 			"1500005":"데이터 입력에 실패하였습니다.",
 		}
 	}
+
+Database
+
+	- AWS RDS 프리티어 Mysql 구성 (접속정보 config/config.php 명세)
+
+Database Table DDL
+
+	CREATE TABLE `board` (
+	`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '고유값',
+	`board_name` varchar(32) DEFAULT NULL COMMENT '게시판명',
+	`subject` varchar(256) NOT NULL COMMENT '제목',
+	`content` mediumtext COMMENT '내용',
+	`writer` varchar(64) DEFAULT NULL COMMENT '작성자',
+	`pw` varchar(128) DEFAULT '' COMMENT '게시글 비밀번호',
+	`is_delete` int(11) DEFAULT '0' COMMENT '삭제여부',
+	`reg_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '작성일',
+	`mod_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '최종수정일',
+	PRIMARY KEY (`id`),
+	KEY `table_name` (`board_name`),
+	KEY `reg_date` (`mod_date`),
+	KEY `mod_date` (`mod_date`)
+	) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='네오플 게시판 테이블';

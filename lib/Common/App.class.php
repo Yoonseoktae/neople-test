@@ -1,20 +1,20 @@
 <?php
 namespace Common;
 
+
+/**
+* @file lib/Common/App.class.php
+* @brief MVC 패턴 라우트 기능을 위한 클래스
+* @author 윤석태 (seknman123@naver.com)
+*/
 class App
 {
 	function __construct() {}
 
-	function getRoute() {
-		$request_uri = trim($_SERVER['REQUEST_URI'], "/");
-		$RequestURI = explode("?", $request_uri);
-		
-		if (!$RequestURI[0]) $Route = array("index");
-		else $Route = explode("/", $RequestURI[0]);
-		
-		return implode(DS , $Route);
-	}
-
+	/**
+	* @brief class파일 경로설정을 위한 라우트함수
+	* @return object
+	*/
 	function initApp()
 	{
 		$URL = parse_url($_SERVER["REQUEST_URI"]);
@@ -48,6 +48,25 @@ class App
 
 	}
 
+	/**
+	* @brief view파일 경로설정을 위한 라우트함수
+	* @return string
+	*/
+	function getRoute() {
+		$request_uri = trim($_SERVER['REQUEST_URI'], "/");
+		$RequestURI = explode("?", $request_uri);
+		
+		if (!$RequestURI[0]) $Route = array("index");
+		else $Route = explode("/", $RequestURI[0]);
+		
+		return implode(DS , $Route);
+	}
+
+	/**
+	* @brief view파일 경로설정을 위한 라우트함수
+	* @param object $RESULT
+	* @return void
+	*/
 	function render($RESULT)
 	{
 		$this->Result = $RESULT;
